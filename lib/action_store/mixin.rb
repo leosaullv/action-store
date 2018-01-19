@@ -219,11 +219,15 @@ module ActionStore
           opts[:target_type] = opts[:target].class.name
           opts[:target_id] = opts[:target].id
         end
+        if opts[:note]
+          opts[:note_type] = opts[:note].class.name
+          opts[:note_id] = opts[:note].id
+        end
         opts
       end
 
       def where_opts(opts)
-        opts.extract!(:action_type, :target_type, :target_id, :user_id, :user_type)
+        opts.extract!(:action_type, :target_type, :target_id, :user_id, :user_type, :note_type, :note_id)
       end
     end
   end
