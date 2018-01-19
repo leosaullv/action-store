@@ -106,6 +106,26 @@ class ActionStore::MixinTest < ActiveSupport::TestCase
     assert_equal blog_post.id, a.target_id
   end
 
+  test ".create_action with note" do
+    user = create(:user)
+    post = create(:post)
+    comment1 = create(:comment)
+    comment2 = create(:comment)
+    assert_equal true, User.create_action('comment', target: post, user: user, note: comment1)
+    assert_equal true, User.create_action('comment', target: post, user: user, note: comment2)
+    assert_equal 2, Action.where(action_type: 'comment', target: post).count
+    assert_equal 1, Action.where(action_type: 'comment', target: post, note: comment1).count
+    assert_equal 1, Action.where(action_type: 'comment', target: post, note: comment2).count
+    assert_equal 2, user.reload.comments_count
+    assert_equal 2, post.reload.comments_count
+    a = Action.last
+    assert_equal 'comment',  a.action_type
+    assert_equal 'Post',     a.target_type
+    assert_equal post.id,    a.target_id
+    assert_equal 'Comment',  a.note_type
+    assert_equal comment2.id,a.note_id
+  end
+
   test ".destroy_action" do
     u1 = create(:user)
     u2 = create(:user)

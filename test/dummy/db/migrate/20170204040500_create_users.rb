@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :name
       t.integer :followers_count
       t.integer :following_count
+      t.integer :comments_count
 
       t.timestamps null: false
     end
@@ -13,6 +14,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.integer :user_id
       t.integer :likes_count
       t.integer :stars_count
+      t.integer :comments_count
 
       t.timestamps null: false
     end

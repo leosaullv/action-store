@@ -6,7 +6,7 @@ module ActionStore
       # puts "Initialize ActionStore::Model"
       belongs_to :target, polymorphic: true
       belongs_to :user,   polymorphic: true
-      belongs_to :note,   polymorphic: true
+      belongs_to :note,   polymorphic: true,  optional: true
     end
   end
 end

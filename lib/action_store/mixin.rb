@@ -77,10 +77,8 @@ module ActionStore
         opts = safe_action_opts(opts)
         return false if opts[:user_id].blank? || opts[:user_type].blank?
         return false if opts[:target_id].blank? || opts[:target_type].blank?
-
         defined_action = find_defined_action(opts[:action_type], opts[:target_type])
         return false if defined_action.nil?
-
         action = Action.find_or_create_by(where_opts(opts))
         if opts[:action_option]
           action.update_attribute(:action_option, opts[:action_option])
