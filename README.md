@@ -6,6 +6,10 @@ ActionStore
 ```rb
   User.create_action('comment', target: post, user: user, note: comment)
 ```
+## serialize target
+```rb
+  User.create_action('comment', target: post, user: user, target_serialize: true)
+```
 
 Store different kind of actions (Like, Follow, Star, Block ...) in one table via ActiveRecord Polymorphic Association.
 
