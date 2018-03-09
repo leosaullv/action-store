@@ -127,6 +127,17 @@ class ActionStore::MixinTest < ActiveSupport::TestCase
     assert_equal comment2.id,a.note_id
   end
 
+  test ".create_action with target serialize" do
+    user = create(:user)
+    post = create(:post)
+    User.create_action('comment', target: post, user: user, target_serialize: true)
+    User.create_action('like', target: post, user: user)
+    as1 = Action.first
+    as2 = Action.last
+    assert_equal post.id, as1.target_serialize.id
+    assert_equal nil, as2.target_serialize
+  end
+
   test ".destroy_action" do
     u1 = create(:user)
     u2 = create(:user)
