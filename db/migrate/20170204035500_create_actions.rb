@@ -9,7 +9,7 @@ class CreateActions < ActiveRecord::Migration[5.0]
       t.integer :note_id
       t.string  :target_type
       t.integer :target_id
-
+      t.text    :target_serialize
       t.timestamps
     end
 

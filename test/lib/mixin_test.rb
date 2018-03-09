@@ -71,6 +71,7 @@ class ActionStore::MixinTest < ActiveSupport::TestCase
     user1 = create(:user)
     assert_equal true, User.create_action('like', target: post, user: user1)
     a1 = Action.last
+
     assert_equal false, a1.new_record?
     assert_not_equal a.id, a1.id
     assert_equal 2, Action.where(action_type: 'like', target: post).count

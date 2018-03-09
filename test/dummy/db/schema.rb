@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20170226113631) do
     t.integer "note_id"
     t.string "target_type"
     t.integer "target_id"
+    t.text "target_serialize"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["action_type"], name: "index_actions_on_action_type"
