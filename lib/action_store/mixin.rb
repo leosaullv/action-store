@@ -79,7 +79,11 @@ module ActionStore
         return false if opts[:target_id].blank? || opts[:target_type].blank?
         defined_action = find_defined_action(opts[:action_type], opts[:target_type])
         return false if defined_action.nil?
-        action = Action.find_or_create_by(where_opts(opts))
+        action = if opts[:mulit]
+          Action.create(where_opts(opts))
+        else
+          Action.find_or_create_by(where_opts(opts))
+        end
         if opts[:target_serialize]
           action.update(target_serialize: opts[:target])
         end
