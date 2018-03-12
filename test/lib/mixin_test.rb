@@ -134,7 +134,7 @@ class ActionStore::MixinTest < ActiveSupport::TestCase
     User.create_action('like', target: post, user: user)
     as1 = Action.first
     as2 = Action.last
-    assert_equal post.id, as1.target_serialize.id
+    assert_equal post.id, as1.target_serialize['id']
     assert_equal nil, as2.target_serialize
   end
 

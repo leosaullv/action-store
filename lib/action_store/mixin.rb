@@ -79,6 +79,9 @@ module ActionStore
         return false if opts[:target_id].blank? || opts[:target_type].blank?
         defined_action = find_defined_action(opts[:action_type], opts[:target_type])
         return false if defined_action.nil?
+        if opts[:target_serialize]
+          opts.merge!(target_serialize: opts[:target].as_json)
+        end
         action = if opts[:multi]
           Action.create(where_opts(opts))
         else
@@ -232,7 +235,7 @@ module ActionStore
       end
 
       def where_opts(opts)
-        opts.extract!(:action_type, :target_type, :target_id, :user_id, :user_type, :note_type, :note_id)
+        opts.extract!(:action_type, :target_type, :target_id, :user_id, :user_type, :note_type, :note_id, :target_serialize)
       end
     end
   end
