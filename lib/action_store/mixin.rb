@@ -87,9 +87,6 @@ module ActionStore
         else
           Action.find_or_create_by(where_opts(opts))
         end
-        if opts[:target_serialize]
-          action.update(target_serialize: opts[:target].as_json)
-        end
         if opts[:action_option]
           action.update_attribute(:action_option, opts[:action_option])
         end
