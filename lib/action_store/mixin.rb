@@ -79,7 +79,7 @@ module ActionStore
         return false if opts[:target_id].blank? || opts[:target_type].blank?
         defined_action = find_defined_action(opts[:action_type], opts[:target_type])
         return false if defined_action.nil?
-        action = if opts[:mulit]
+        action = if opts[:multi]
           Action.create(where_opts(opts))
         else
           Action.find_or_create_by(where_opts(opts))
